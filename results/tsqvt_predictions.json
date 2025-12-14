@@ -1,0 +1,63 @@
+{
+  "manifold": {
+    "volume": 1.85e-61,
+    "twist_angle": 0.198,
+    "chern_numbers": [
+      3,
+      3
+    ],
+    "hodge_numbers": [
+      3,
+      243
+    ],
+    "n_generations": 3,
+    "euler_characteristic": -480
+  },
+  "condensation": {
+    "vev": 0.742,
+    "critical_value": 0.6666666666666666,
+    "planck_scale": 1.22e+19,
+    "effective_cutoff": 1.4163085536483447e+19
+  },
+  "C4_coefficients": {
+    "U1": 0.875,
+    "SU2": 0.5416666666666666,
+    "SU3": 0.5
+  },
+  "gauge_couplings": {
+    "alpha_em_inv": 128.01349083575164,
+    "sin2_theta_w": 0.230950779022482,
+    "alpha_s": 0.11875348358220308,
+    "mw_mz_ratio": 0.8769545147711584,
+    "g1_mz": 0.4612372437361916,
+    "g2_mz": 0.6519545880047303,
+    "g3_mz": 1.2215974322337868
+  },
+  "comparison": {
+    "alpha_em_inv": {
+      "predicted": 128.01349083575164,
+      "experimental": 127.9,
+      "error_percent": 0.0887340388988536
+    },
+    "sin2_theta_w": {
+      "predicted": 0.230950779022482,
+      "experimental": 0.23122,
+      "error_percent": 0.11643498724937189
+    },
+    "alpha_s": {
+      "predicted": 0.11875348358220308,
+      "experimental": 0.1179,
+      "error_percent": 0.7239046498753855
+    },
+    "mw_mz_ratio": {
+      "predicted": 0.8769545147711584,
+      "experimental": 0.88147,
+      "error_percent": 0.5122676017154978
+    }
+  },
+  "experimental": {
+    "collapse_time_ms": 6.124219263129763,
+    "sound_speed_ratio": 1.0,
+    "poisson_ratio": -0.49
+  }
+}

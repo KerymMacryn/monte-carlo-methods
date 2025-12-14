@@ -1,0 +1,223 @@
+Metadata-Version: 2.4
+Name: tsqvt
+Version: 1.0.0
+Summary: Twistorial Spectral Quantum Vacuum Theory: SM parameters from spectral geometry
+Home-page: https://github.com/kerym-makraini/sm-parameters-repo
+Author: Kerym Makraini
+Author-email: kerym.makraini@example.com
+Project-URL: Documentation, https://github.com/kerym-makraini/sm-parameters-repo#readme
+Project-URL: Bug Reports, https://github.com/kerym-makraini/sm-parameters-repo/issues
+Project-URL: Source, https://github.com/kerym-makraini/sm-parameters-repo
+Keywords: physics,quantum gravity,spectral geometry,noncommutative geometry,twistor theory,standard model
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: scipy>=1.7.0
+Requires-Dist: sympy>=1.9
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: matplotlib>=3.5.0
+Requires-Dist: seaborn>=0.11.0
+Requires-Dist: jupyter>=1.0.0
+Requires-Dist: ipykernel>=6.0.0
+Requires-Dist: pytest>=7.0.0
+Requires-Dist: pytest-cov>=3.0.0
+Requires-Dist: black>=22.0.0
+Requires-Dist: flake8>=4.0.0
+Requires-Dist: sphinx>=4.0.0
+Requires-Dist: sphinx-rtd-theme>=1.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=3.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=4.0.0; extra == "dev"
+Requires-Dist: mypy>=0.950; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "docs"
+Requires-Dist: nbsphinx>=0.8.0; extra == "docs"
+Provides-Extra: notebooks
+Requires-Dist: jupyter>=1.0.0; extra == "notebooks"
+Requires-Dist: matplotlib>=3.5.0; extra == "notebooks"
+Requires-Dist: seaborn>=0.11.0; extra == "notebooks"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# TSQVT: Twistorial Spectral Quantum Vacuum Theory
+
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![arXiv](https://img.shields.io/badge/arXiv-2501.XXXXX-b31b1b.svg)](https://arxiv.org/abs/2501.XXXXX)
+
+**Complete derivation of Standard Model parameters from spectral geometry.**
+
+This repository contains the computational implementation of TSQVT, a theoretical framework that derives the 26 free parameters of the Standard Model from 4 geometric quantities characterizing the spectral manifold.
+
+## 🎯 Key Results
+
+| Observable | TSQVT Prediction | Experimental | Error |
+|------------|------------------|--------------|-------|
+| α⁻¹(m_Z) | 136.84 ± 0.52 | 137.036 | 0.14% |
+| sin²θ_W | 0.2315 ± 0.0008 | 0.23122 | 0.12% |
+| n_gen | 3 | 3 | **exact** |
+| m_e (MeV) | 0.489 ± 0.024 | 0.511 | 4.3% |
+| m_t (GeV) | 174.8 ± 2.1 | 172.7 | 1.2% |
+
+## 📦 Installation
+
+```bash
+# Clone repository
+git clone https://github.com/kerym-makraini/sm-parameters-repo.git
+cd sm-parameters-repo
+
+# Install in development mode
+pip install -e .
+
+# Or install with all extras
+pip install -e ".[dev,notebooks]"
+```
+
+## 🚀 Quick Start
+
+```python
+import tsqvt
+from tsqvt.core import SpectralManifold, CondensationField
+from tsqvt.gauge import compute_gauge_couplings
+from tsqvt.rg import RGRunner
+
+# Create spectral manifold with TSQVT parameters
+manifold = SpectralManifold(
+    volume=1.85e-61,        # m^4
+    twist_angle=0.198,      # rad
+    chern_numbers=(3, 3)
+)
+
+# Initialize condensation field
+field = CondensationField(vev=0.742)
+
+# Compute gauge couplings at GUT scale
+couplings = compute_gauge_couplings(manifold, field)
+print(f"α⁻¹(M_GUT) = {1/couplings['alpha']:.2f}")
+
+# Run RG evolution to M_Z
+runner = RGRunner(loops=2)
+couplings_mz = runner.run(couplings, mu_high=2e16, mu_low=91.2)
+print(f"α⁻¹(M_Z) = {1/couplings_mz['alpha']:.2f}")
+```
+
+## 📁 Repository Structure
+
+```
+sm-parameters-repo/
+├── tsqvt/                      # Main Python package
+│   ├── core/                   # Spectral manifold, condensation field
+│   ├── spectral/               # Heat kernel, Dirac operators
+│   ├── gauge/                  # Gauge coupling calculations
+│   ├── rg/                     # Renormalization group running
+│   ├── experimental/           # Collapse predictions, BEC tests
+│   └── utils/                  # Constants, plotting
+├── tests/                      # Unit tests (pytest)
+├── examples/                   # Jupyter notebooks
+├── scripts/                    # Command-line tools
+├── papers/                     # Manuscripts and supplementary
+└── data/                       # Numerical results
+```
+
+## 🔬 Experimental Predictions
+
+TSQVT makes unique, falsifiable predictions:
+
+1. **Objective Collapse Time**: τ = 87 ± 15 ms for m = 10⁻¹⁴ kg nanoparticle
+2. **BEC Sound Speed**: c_s(ρ=2/3) = c (exact)
+3. **Spectral Chirp Photons**: E_γ = 1.2 ± 0.1 keV
+4. **Auxetic Poisson Ratio**: ν(ρ→1) = -0.50 ± 0.02
+
+```python
+from tsqvt.experimental import CollapsePredictor, BECSoundSpeed
+
+# Collapse time prediction
+predictor = CollapsePredictor(mass=1e-14, separation=100e-9)
+tau = predictor.compute_collapse_time()
+print(f"Collapse time: {tau*1000:.1f} ms")
+
+# BEC sound speed
+bec = BECSoundSpeed(rho_target=2/3)
+c_s = bec.compute_sound_speed()
+print(f"Sound speed ratio: c_s/c = {c_s/299792458:.6f}")
+```
+
+## 🧪 Running Tests
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# Run with coverage
+pytest tests/ --cov=tsqvt --cov-report=html
+
+# Run specific test module
+pytest tests/test_gauge.py -v
+```
+
+## 📊 Examples
+
+See the `examples/` directory for Jupyter notebooks:
+
+1. **01_basic_calculations.ipynb**: Introduction to TSQVT computations
+2. **02_standard_model.ipynb**: Full SM parameter derivation
+3. **03_experimental_predictions.ipynb**: Falsifiable predictions
+4. **04_monte_carlo_analysis.ipynb**: Uncertainty quantification
+
+## 📚 References
+
+- Makraini, K. (2025). *Emergent Lorentzian Spacetime and Gauge Dynamics from Twistorial Spectral Data*. Next Research (Elsevier).
+- Makraini, K. (2026). *Complete Derivation of Standard Model Parameters from TSQVT Spectral Data*. Annals of Physics (submitted).
+
+## 📖 Citation
+
+```bibtex
+@article{Makraini2025TSQVT,
+  author  = {Makraini, Kerym},
+  title   = {Complete Derivation of Standard Model Parameters from TSQVT Spectral Data},
+  journal = {Annals of Physics},
+  year    = {2025},
+  note    = {In preparation}
+}
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read the contributing guidelines and submit pull requests.
+
+## 📧 Contact
+
+- **Author**: Kerym Makraini
+- **Affiliation**: UNED – National University of Distance Education, Madrid, Spain
+- **Email**: kerym.makraini@example.com

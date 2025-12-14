@@ -1,0 +1,2 @@
+[console_scripts]
+tsqvt-predict = scripts.run_predictions:main

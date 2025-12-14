@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+title: "TSQVT: Twistorial Spectral Quantum Vacuum Theory"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: Makraini
+    given-names: Kerym
+    orcid: "https://orcid.org/0009-0007-6597-3283"
+    affiliation: "UNED – National University of Distance Education"
+repository-code: "https://github.com/kerym-makraini/monte-carlo-methods"
+url: "https://github.com/kerym-makraini/monte-carlo-methods"
+abstract: >-
+  Complete computational implementation of the Twistorial Spectral 
+  Quantum Vacuum Theory (TSQVT), deriving Standard Model parameters 
+  from spectral geometry. Includes gauge coupling calculations, 
+  fermion mass predictions, RG running, and experimental predictions.
+keywords:
+  - quantum gravity
+  - spectral geometry
+  - noncommutative geometry
+  - twistor theory
+  - standard model
+  - gauge couplings
+  - fermion masses
+license: MIT
+version: "1.0.0"
+date-released: "2025-01-01"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Makraini
+      given-names: Kerym
+  title: "Complete Derivation of Standard Model Parameters from TSQVT Spectral Data"
+  journal: "Annals of Physics"
+  year: 2025
+  status: "in preparation"
+references:
+  - type: article
+    authors:
+      - family-names: Makraini
+        given-names: Kerym
+    title: "Emergent Lorentzian Spacetime and Gauge Dynamics from Twistorial Spectral Data"
+    journal: "Next Research (Elsevier)"
+    year: 2025
+    identifiers:
+      - type: doi
+        value: "10.1016/j.nexres.2025.101114"
